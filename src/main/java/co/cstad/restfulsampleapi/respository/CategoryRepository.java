@@ -1,0 +1,32 @@
+package co.cstad.restfulsampleapi.respository;
+
+import co.cstad.restfulsampleapi.model.Category;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class CategoryRepository {
+    private final List<Category> allCategory = new ArrayList<>() {{
+        add(Category.builder().id(1).title("title 1").description("Desceription1").build());
+        add(Category.builder().id(2).title("title 2").description("description2").build());
+        add(Category.builder().id(3).title("title 3").description("description3").build());
+    }};
+
+    public void addCaetegory(Category category) {
+        allCategory.add(category);
+    }
+
+    public List<Category> getAllCategory() {
+        return allCategory;
+    }
+
+    public void updateCategory(Category category) {
+        int index = allCategory.indexOf(allCategory.stream().
+                filter(findCategory -> findCategory.getId() == category.getId()).findFirst().orElse(null));
+        allCategory.set(index, category);
+    }
+
+    public void deleteCategory(int id) {
+        allCategory.remove(allCategory.stream().filter(findCategory -> findCategory.getId() == id).findFirst().orElse(null));
+    }
+}
