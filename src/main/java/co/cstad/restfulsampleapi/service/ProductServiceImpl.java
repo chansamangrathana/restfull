@@ -39,7 +39,7 @@ public class ProductServiceImpl implements ProductService{
     public List<ProductResponse> getAllProduct(String productName) {
         var product=productRepository.getAllProduct();
         if(!productName.isEmpty()){
-            product = product.stream.filter(
+            product = product.stream().filter(
                     pro-> pro.getTitle().toLowerCase().contains(productName.toLowerCase())
             ).toList();
         }
@@ -71,7 +71,7 @@ public class ProductServiceImpl implements ProductService{
     public ProductResponse createProduct(ProductRequest productRequest) {
         Product product = Product.builder().title(productRequest.title()).price(productRequest.price()).imageUrl(productRequest.imageUrl()).description(productRequest.description()).build();
         var maxId = productRepository.getAllProduct().stream().max(Comparator.comparingInt(Product::getId)).map(Product::getId);
-        int newId= maxId.map(integer -> (integer + 1)).orElse(1);
+        int newId= maxId.map(integer -> (integer+1)).orElse(1);
         product.setId(newId);
         productRepository.addAllproduct(product);
         return mapProductToResponse(product);

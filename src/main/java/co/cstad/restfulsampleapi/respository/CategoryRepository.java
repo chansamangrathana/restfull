@@ -1,10 +1,13 @@
 package co.cstad.restfulsampleapi.respository;
 
 import co.cstad.restfulsampleapi.model.Category;
+import lombok.Getter;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
-
+@Getter
+@Repository
 public class CategoryRepository {
     private final List<Category> allCategory = new ArrayList<>() {{
         add(Category.builder().id(1).title("title 1").description("Desceription1").build());
